@@ -15,13 +15,19 @@ public class Pintor implements Runnable {
         while (!fabrica.isTerminada()) {
             try {
                 Bicicleta bicicleta = fabrica.recoger();
-                Thread.sleep(1000);
-                System.out.println("El pintor " + nombre + " ha terminado " + bicicleta.getNumeroSerie());
+
+                if (bicicleta == null)
+
+                    break;
+
+                Thread.sleep(500);
+                System.out.println(nombre.toUpperCase() + " -> Pintando bicicleta " + bicicleta.getNumeroSerie());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("El pintor " + nombre + " ha terminado");
+        System.out.println(nombre.toUpperCase() + " -> Última bicicleta pintada. Fin del trabajo.");
+
     }
 
 }

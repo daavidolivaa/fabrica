@@ -10,17 +10,17 @@ public class Mecanico implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i <= 10; i++) {
             Bicicleta bicicleta = new Bicicleta(Integer.toString(i));
             try {
-                Thread.sleep(1000);
+                Thread.sleep(700);
                 fabrica.colocar(bicicleta);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         fabrica.terminar();
-        System.out.println("El mecanico ha terminado ");
+        System.out.println("MECÁNICO -> Producción finalizada.");
     }
 
 }

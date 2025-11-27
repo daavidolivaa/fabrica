@@ -17,11 +17,11 @@ public class Fabrica {
                                                                                         // al metodo
                                                                                         // void va a ser cuando no
                                                                                         // devuelga algo
-        while (bicicleta != null && !terminada) { // exclamacion = es que es disinto
+        while (this.bicicleta != null) { // exclamacion = es que es disinto
             wait();
         }
         this.bicicleta = bicicleta;
-        System.out.println("Se ha colocado la " + bicicleta.getNumeroSerie());
+        System.out.println("MECÁNICO -> Bicicleta ensamblada: " + bicicleta.getNumeroSerie());
         notifyAll();
     }
 
@@ -30,10 +30,15 @@ public class Fabrica {
                                                   // bicicletas
             wait();
         }
-        Bicicleta bicicleta = this.bicicleta;
+        if (bicicleta == null && !terminada) {
+            return null;
+        }
+
+        Bicicleta bici = this.bicicleta;
         this.bicicleta = null;
         notifyAll();
-        return bicicleta;
+        return bici;
+
     }
 
     public synchronized void terminar() { // metodo
