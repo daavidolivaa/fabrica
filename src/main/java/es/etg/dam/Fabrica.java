@@ -1,35 +1,30 @@
 package es.etg.dam;
 
-//region critica / objeto compartido
-
 public class Fabrica {
 
-    private Bicicleta bicicleta; // objetos
+    private final String MENSAJE_MECANICO = "Mecánico -> Bicicleta ensamblada: ";
+    private Bicicleta bicicleta;
     private boolean terminada = false;
 
-    public boolean isTerminada() { // getter
+    public boolean isTerminada() {
         return terminada;
     }
 
-    public synchronized void colocar(Bicicleta bicicleta) throws InterruptedException { // metodo
-                                                                                        // lo que esta dentro del
-                                                                                        // parentesis es lo que le pasas
-                                                                                        // al metodo
-                                                                                        // void va a ser cuando no
-                                                                                        // devuelga algo
-        while (this.bicicleta != null) { // exclamacion = es que es disinto
+    public synchronized void colocar(Bicicleta bicicleta) throws InterruptedException {
+
+        while (this.bicicleta != null) {
             wait();
         }
         this.bicicleta = bicicleta;
-        System.out.println("MECÁNICO -> Bicicleta ensamblada: " + bicicleta.getNumeroSerie());
+        System.out.println(MENSAJE_MECANICO + bicicleta.getNumeroSerie());
         notifyAll();
     }
 
-    public synchronized Bicicleta recoger() throws InterruptedException { // metodo
-        while (bicicleta == null && !terminada) { // && !terminada es para cuando tengo bicicletas y no va a haber mas
-                                                  // bicicletas
+    public synchronized Bicicleta recoger() throws InterruptedException {
+        while (bicicleta == null && !terminada) {
             wait();
         }
+
         if (bicicleta == null && !terminada) {
             return null;
         }
@@ -41,7 +36,7 @@ public class Fabrica {
 
     }
 
-    public synchronized void terminar() { // metodo
+    public synchronized void terminar() {
         terminada = true;
         notifyAll();
     }

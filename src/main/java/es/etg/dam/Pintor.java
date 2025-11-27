@@ -2,6 +2,10 @@ package es.etg.dam;
 
 public class Pintor implements Runnable {
 
+    private final String MENSAJE = " -> Pintando bicicleta ";
+    private final String MENSAJE_FINAL = " -> Última bicicleta pintada. Fin del trabajo.";
+    private final int TIEMPO = 500;
+
     private Fabrica fabrica;
     private String nombre;
 
@@ -16,17 +20,17 @@ public class Pintor implements Runnable {
             try {
                 Bicicleta bicicleta = fabrica.recoger();
 
-                if (bicicleta == null)
-
+                if (bicicleta == null) {
                     break;
+                }
 
-                Thread.sleep(500);
-                System.out.println(nombre.toUpperCase() + " -> Pintando bicicleta " + bicicleta.getNumeroSerie());
+                Thread.sleep(TIEMPO);
+                System.out.println(nombre + MENSAJE + bicicleta.getNumeroSerie());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(nombre.toUpperCase() + " -> Última bicicleta pintada. Fin del trabajo.");
+        System.out.println(nombre + MENSAJE_FINAL);
 
     }
 

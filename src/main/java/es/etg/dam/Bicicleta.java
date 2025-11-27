@@ -1,15 +1,14 @@
 package es.etg.dam;
 
-//objeto
 public class Bicicleta {
 
-    private String numeroSerie; // atributo
+    private String numeroSerie;
 
-    public Bicicleta(String numeroSerie) { // constructor
+    public Bicicleta(String numeroSerie) {
         this.numeroSerie = numeroSerie;
     }
 
-    public String getNumeroSerie() { // getter
+    public String getNumeroSerie() {
         return numeroSerie;
     }
 
